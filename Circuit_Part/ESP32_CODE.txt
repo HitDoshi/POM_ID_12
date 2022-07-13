@@ -1,0 +1,61 @@
+#include "BluetoothSerial.h"
+
+BluetoothSerial ESP_Bluetooth;
+
+int incoming;
+int LED1 = 27;
+int LED2 = 25;
+int LED = 2;
+ 
+void setup()
+{
+  Serial.begin(115200);
+
+   ESP_Bluetooth.begin("ESP32_LED_Control--2");
+    Serial.println("Bluetooth Device is Ready to Pair...");
+
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, HIGH);
+}
+
+void loop()
+{
+
+  if (ESP_Bluetooth.available())
+  {
+    incoming = ESP_Bluetooth.read();
+    Serial.print("Received Status:");
+    Serial.println(incoming);
+    
+    if (incoming == 50)
+    {
+      digitalWrite(LED1, HIGH);
+      digitalWrite(LED, HIGH);
+      ESP_Bluetooth.println("LED1 ON");
+    }
+
+    if (incoming == 55)
+    {
+      digitalWrite(LED1, LOW);
+      digitalWrite(LED, LOW);
+      ESP_Bluetooth.  println("LED1 OFF");
+    }
+
+    if (incoming == 48)
+    {
+      digitalWrite(LED2, HIGH);
+      digitalWrite(LED, HIGH);
+      ESP_Bluetooth.println("LED2 ON");
+    }
+
+    if (incoming == 53)
+    {
+      digitalWrite(LED2, LOW);
+      digitalWrite(LED, LOW);
+      ESP_Bluetooth.  println("LED2 OFF");
+    }
+    
+  }
+}
