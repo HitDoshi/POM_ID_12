@@ -1,4 +1,4 @@
-# USA POM LAB Company Compition Project
+# USA POM LAB Company Project
 In this Compition I have get 1st rank.<br>
 This project based on IOT module controll thought Mobile Appplication.
 <br>
